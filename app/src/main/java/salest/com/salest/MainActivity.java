@@ -14,7 +14,11 @@ import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1;
+    ArrayList<ArchivosMusica>  canciones ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "Permisos concedidos", Toast.LENGTH_SHORT).show();
+            canciones=getAllAudio(this);
         }
     }
 
@@ -53,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED)
             {
                 Toast.makeText(this, "Permisos concedidos", Toast.LENGTH_SHORT).show();
+                canciones=getAllAudio(this);
             }
             else
             {
@@ -112,6 +119,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static  ArrayList<ArchivosMusica> getAllAudio(Context context)
+    {
+        ArrayList<ArchivosMusica> ListaCanciones= new ArrayList<>();
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String[] projection=
+                {
+                        MediaStore.Audio.Media.ALBUM,
+                        MediaStore.Audio.Media.TITLE,
+                        MediaStore.Audio.Media.DURATION,
+                        MediaStore.Audio.Media.DATA,
+                        MediaStore.Audio.Media.ARTIST,
 
+                };
+        Cursor cursor=context.getContentResolver().query(uri, projection, null,null, null);
+        if(cursor!=null)
+        {
+            while(cursor.moveToNext())
+            {
+                String album=cursor.getString(0);
+                String titulo=cursor.getString(1);
+                String duracion=cursor.getString(2);
+                String ruta=cursor.getString(3);
+                String artista=cursor.getString(4);
 
+                ArchivosMusica canciones = new ArchivosMusica(ruta, titulo, artista,album,duracion);
+                Log.e("path: "+ruta,"titulo: "+titulo);
+                ListaCanciones.add(canciones);
+            }
+            cursor.close();
+        }
+        return ListaCanciones;
+
+    }
 }
