@@ -13,10 +13,10 @@
         android:background="@color/colorPrimary"
         android:id="@+id/tab_layout"
         app:tabIndicatorFullWidth="true"
-        app:tabIndicatorGravity="center"
         app:tabTextColor="@color/colorAccent"
-        app:tabIndicatorHeight="40dp"
-        app:tabIndicatorColor="@color/colorCyan"/>
+        app:tabIndicatorColor="@color/colorCyan"
+        app:tabIndicatorHeight="5dp"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
