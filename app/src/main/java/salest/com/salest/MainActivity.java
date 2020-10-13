@@ -1,6 +1,7 @@
 package salest.com.salest;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager=findViewById(R.id.viewpager);
         TabLayout tabLayout=findViewById(R.id.tab_layout);
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-
+        viewPagerAdapter.addFragments(new FragmentCanciones(), "Canciones");
+        viewPagerAdapter.addFragments(new AlbumFragment(), "Albums");
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     public static class ViewPagerAdapter extends FragmentPagerAdapter
@@ -57,10 +61,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getCount()
+        public int getCount() { return fragments.size(); }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position)
         {
-            return fragments.size();
+            return titles.get(position);
         }
+
+
     }
+
+
 
 }
