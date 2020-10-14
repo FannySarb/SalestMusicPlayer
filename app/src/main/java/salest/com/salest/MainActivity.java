@@ -28,13 +28,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1;
-    ArrayList<ArchivosMusica>  canciones ;
+    static ArrayList<ArchivosMusica>  canciones ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permisos();
-        initViewerPager();
+
     }
 
     private void permisos()
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Permisos concedidos", Toast.LENGTH_SHORT).show();
             canciones=getAllAudio(this);
+            initViewerPager();
         }
     }
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED)
             {
-                Toast.makeText(this, "Permisos concedidos", Toast.LENGTH_SHORT).show();
+                initViewerPager();
                 canciones=getAllAudio(this);
             }
             else
