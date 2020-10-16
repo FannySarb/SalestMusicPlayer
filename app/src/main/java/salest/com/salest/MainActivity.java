@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Permisos concedidos", Toast.LENGTH_SHORT).show();
             canciones=getAllAudio(this);
             initViewerPager();
         }
