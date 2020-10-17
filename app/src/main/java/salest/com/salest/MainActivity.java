@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1;
     static ArrayList<ArchivosMusica>  canciones ;
+    static boolean shuffleBoolean = false, repeatBoolean = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         MediaStore.Audio.Media.DURATION,
                         MediaStore.Audio.Media.DATA,
                         MediaStore.Audio.Media.ARTIST,
+                        MediaStore.Audio.Media._ID
 
                 };
         Cursor cursor=context.getContentResolver().query(uri, projection, null,null, null);
@@ -142,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
                 String duracion=cursor.getString(2);
                 String ruta=cursor.getString(3);
                 String artista=cursor.getString(4);
-
-                ArchivosMusica canciones = new ArchivosMusica(ruta, titulo, artista,album,duracion);
+                String id = cursor.getString(5);
+                ArchivosMusica canciones = new ArchivosMusica(ruta, titulo, artista,album,duracion, id);
                 Log.e("path: "+ruta,"titulo: "+titulo);
                 ListaCanciones.add(canciones);
             }
