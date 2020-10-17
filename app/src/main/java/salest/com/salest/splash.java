@@ -27,13 +27,13 @@ public class splash extends AppCompatActivity {
         Animation animacion1= AnimationUtils.loadAnimation(this, R.anim.despup);
         Animation animacion2= AnimationUtils.loadAnimation(this,R.anim.despdown);
 
-       // TextView miText=findViewById(R.id.mi);
-        //TextView nombreApp=findViewById(R.id.calculadorapp);
+        TextView mp=findViewById(R.id.musicp);
+        TextView by=findViewById(R.id.by);
         ImageView logo=findViewById(R.id.logo);
 
         logo.setAnimation(animacion1);
-       // miText.setAnimation(animacion2);
-        //nombreApp.setAnimation(animacion2);
+        mp.setAnimation(animacion2);
+        by.setAnimation(animacion2);
 
         new Handler().postDelayed(new Runnable(){
             @Override

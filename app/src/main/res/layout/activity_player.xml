@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/layout_top_btn"
-        android:background="@drawable/gradient_bg"
+
         android:layout_alignParentTop="true">
 
 
@@ -95,15 +95,15 @@
 
     <RelativeLayout
         android:id="@+id/relative_layout_for_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="-3dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/gradient_bg">
+        android:layout_marginStart="-1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="0dp"
+        >
 
         <ImageView
             android:id="@+id/id_shuffle_on"
