@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "salest.com.salest"
-        minSdkVersion 25
+        minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -33,4 +33,5 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'androidx.palette:palette:1.0.0'
 }

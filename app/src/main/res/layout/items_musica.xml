@@ -22,6 +22,16 @@
         android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
         android:textColor="@color/colorAccent"
+        android:layout_toStartOf="@id/menuMore"
         android:id="@+id/nombreCancion"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/menuMore"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_more_vert"/>
 
 </RelativeLayout>
