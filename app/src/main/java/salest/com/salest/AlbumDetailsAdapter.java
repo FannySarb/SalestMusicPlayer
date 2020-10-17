@@ -16,12 +16,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
+public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapter.MyHolder> {
     private Context mContext;
-    private ArrayList<ArchivosMusica> albumFiles;
+    static ArrayList<ArchivosMusica> albumFiles;
     View view;
 
-    public AlbumAdapter(Context mContext, ArrayList<ArchivosMusica> albumFiles) {
+    public AlbumDetailsAdapter(Context mContext, ArrayList<ArchivosMusica> albumFiles) {
         this.mContext = mContext;
         this.albumFiles = albumFiles;
     }
@@ -29,13 +29,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(mContext).inflate(R.layout.album_item, parent,false);
+        view= LayoutInflater.from(mContext).inflate(R.layout.items_musica, parent,false);
         return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, final int position) {
-        holder.nombre_album.setText(albumFiles.get(position).getAlbum());
+        holder.nombre_album.setText(albumFiles.get(position).getTitulo());
         byte[] image= getAlbumArt(albumFiles.get(position).getRuta());
         if(image!=null)
         {
@@ -51,12 +51,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (mContext, AlbumDetails.class);
-                intent.putExtra("albumName", albumFiles.get(position).getAlbum());
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, PlayerActivity.class);
+                intent.putExtra("sender", "albumDetails");
+                intent.putExtra("position", position);
                 mContext.startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -70,8 +72,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
         public MyHolder(@NonNull View itemView)
         {
             super(itemView);
-            album_image=itemView.findViewById(R.id.album_image);
-            nombre_album=itemView.findViewById(R.id.nombre_album);
+            album_image=itemView.findViewById(R.id.portada);
+            nombre_album=itemView.findViewById(R.id.nombreCancion);
         }
     }
 

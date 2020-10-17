@@ -12,12 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import static salest.com.salest.MainActivity.albums;
 import static salest.com.salest.MainActivity.canciones;
+import static salest.com.salest.MusicAdapter.mFiles;
 
 public class FragmentCanciones extends Fragment {
 
     RecyclerView recyclerView;
-    MusicAdapter musicAdapter;
+    static MusicAdapter musicAdapter;
 
     public FragmentCanciones() {
         // Required empty public constructor

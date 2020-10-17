@@ -29,9 +29,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static salest.com.salest.AlbumDetailsAdapter.albumFiles;
 import static salest.com.salest.MainActivity.canciones;
 import static salest.com.salest.MainActivity.repeatBoolean;
 import static salest.com.salest.MainActivity.shuffleBoolean;
+import static salest.com.salest.MusicAdapter.mFiles;
 
 public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
@@ -387,7 +389,15 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
     private void getIntenMethod()
     {
         position=getIntent().getIntExtra("position", -1);
-        listSongs=canciones;
+        String sender = getIntent().getStringExtra("sender");
+        if(sender != null && sender.equals("albumDetails"))
+        {
+            listSongs = albumFiles;
+        }
+        else
+        {
+            listSongs = mFiles;
+        }
         if (listSongs != null)
         {
             playPauseBtn.setImageResource(R.drawable.ic_pause);

@@ -19,17 +19,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     public static final int REQUEST_CODE = 1;
     static ArrayList<ArchivosMusica>  canciones ;
     static boolean shuffleBoolean = false, repeatBoolean = false;
+    static ArrayList<ArchivosMusica> albums = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+
     public static class ViewPagerAdapter extends FragmentPagerAdapter
     {
         private ArrayList<Fragment> fragments;
@@ -122,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static  ArrayList<ArchivosMusica> getAllAudio(Context context)
     {
+        ArrayList<String> duplicate = new ArrayList<>();
         ArrayList<ArchivosMusica> ListaCanciones= new ArrayList<>();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String[] projection=
@@ -148,10 +154,43 @@ public class MainActivity extends AppCompatActivity {
                 ArchivosMusica canciones = new ArchivosMusica(ruta, titulo, artista,album,duracion, id);
                 Log.e("path: "+ruta,"titulo: "+titulo);
                 ListaCanciones.add(canciones);
+                if (!duplicate.contains(album)){
+                    albums.add(canciones);
+                    duplicate.add(album);
+                }
             }
             cursor.close();
         }
         return ListaCanciones;
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem menuItem = menu.findItem(R.id.search_option);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        ArrayList<ArchivosMusica> myFiles = new ArrayList<>();
+        for (ArchivosMusica song : canciones)
+        {
+            if(song.getTitulo().toLowerCase().contains(userInput))
+            {
+                canciones.add(song);
+            }
+        }
+        FragmentCanciones.musicAdapter.updateList(myFiles);
+        return true;
     }
 }
