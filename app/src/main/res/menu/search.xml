@@ -7,30 +7,24 @@
         android:id="@+id/search_option"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="ifRoom"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-         />
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
     <item
         android:title="Ordenar"
         android:id="@+id/sort_option"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never">
     <menu>
         <item
             android:title="Nombre"
             android:id="@+id/by_name"
-            app:showAsAction="never"
-            />
+            app:showAsAction="never"/>
         <item
             android:title="Fecha"
             android:id="@+id/by_date"
-            app:showAsAction="never"
-            />
+            app:showAsAction="never"/>
         <item
             android:title="Tamaño"
             android:id="@+id/by_size"
-            app:showAsAction="never"
-            />
-
+            app:showAsAction="never"/>
     </menu>
-
+  </item>
 </menu>
